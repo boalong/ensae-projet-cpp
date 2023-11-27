@@ -1,0 +1,7 @@
+Options vanille :
+    - européennes
+    - américaines
+
+Options exotiques :
+    - les options de première génération : caps, floors, swaptions européens. Ces options sont essentiellement utilisées sur le marché des taux d’intérêt ;
+    - les options de seconde génération, les path-dependent : lookbacks, asiatiques, à barrière, digitales, composées, à choix différé.
