@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1703549069 source:c:\users\khelifa\documents\modèles office personnalisés\options\main.cpp
+	<iostream>
+	"european_call.h"
+	"european_put.h"
+
+1703544374 source:c:\users\khelifa\documents\modèles office personnalisés\options\src\option.cpp
+	"option.h"
+
+1703536708 c:\users\khelifa\documents\modèles office personnalisés\options\include\option.h
+
+1703548925 source:c:\users\khelifa\documents\modèles office personnalisés\options\src\european_call.cpp
+	"european_call.h"
+	<cmath>
+	<random>
+	<ctime>
+
+1703544266 c:\users\khelifa\documents\modèles office personnalisés\options\include\european_call.h
+	"option.h"
+
+1703548952 source:c:\users\khelifa\documents\modèles office personnalisés\options\src\european_put.cpp
+	"european_put.h"
+	<cmath>
+	<random>
+	<ctime>
+
+1703544425 c:\users\khelifa\documents\modèles office personnalisés\options\include\european_put.h
+	"option.h"
+
