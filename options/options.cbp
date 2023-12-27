@@ -34,10 +34,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/asian_call.h" />
+		<Unit filename="include/asian_put.h" />
 		<Unit filename="include/european_call.h" />
 		<Unit filename="include/european_put.h" />
 		<Unit filename="include/option.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/asian_call.cpp" />
+		<Unit filename="src/asian_put.cpp" />
 		<Unit filename="src/european_call.cpp" />
 		<Unit filename="src/european_put.cpp" />
 		<Unit filename="src/option.cpp" />

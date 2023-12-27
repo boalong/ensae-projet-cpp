@@ -2,6 +2,7 @@
 #include <cmath>
 #include <random>
 #include <ctime>
+#include <iostream>
 
 using namespace std;
 
@@ -20,25 +21,44 @@ double european_put::price_BSM()
 }
 
 
-double european_put::price_MC(int N)
+double european_put::price_MC(int N_timesteps, int N_simulations)
 {
     double sum = 0;
-    double S = get_spotprice() * exp((get_r() - 0.5 * get_volatility() * get_volatility()) * get_maturity());
+    double S;
     double diff;
     double gauss;
 
     default_random_engine generator(time(NULL));
     normal_distribution<double> distribution(0.0,1.0);
 
-    for (int i=0 ; i<N ; i++)
+    for (int i=0 ; i < N_simulations ; i++)
     {
-        gauss = distribution(generator);
-        diff = get_strikeprice() - S * exp(get_volatility() * sqrt(get_maturity()) * gauss);
+        S = get_spotprice();
+
+        for (int j=0 ; j < N_timesteps ; j++)
+        {
+            gauss = distribution(generator);
+            S *= exp((get_r() - 0.5 * get_volatility() * get_volatility()) * (get_maturity() / N_timesteps) + get_volatility() * sqrt(get_maturity() / N_timesteps) * gauss);
+        }
+
+        diff = get_strikeprice() - S;
         if (diff>0)
         {
             sum += diff;
         }
     }
 
-    return (sum / N) * exp(-get_r() * get_maturity());
+    return (sum / N_simulations) * exp(-get_r() * get_maturity());
+}
+
+
+void european_put::replication()
+{
+    double d1 = (log(get_spotprice() / get_strikeprice()) + (get_r() + 0.5 * get_volatility() * get_volatility()) * get_maturity()) / (get_volatility() * sqrt(get_maturity()));
+    double d2 = d1 - get_volatility() * sqrt(get_maturity());
+
+    double N_shares = get_spotprice() * 0.5 * (1.0 + erf(-d1 / sqrt(2.0)));
+    double N_bonds = get_strikeprice() * exp(-get_r()*get_maturity()) * 0.5 * (1.0 + erf(-d2 / sqrt(2.0)));
+
+    cout<<"To replicate this European put, sell "<<N_shares<<" in shares of the stock \nand lend "<<N_bonds<<" in bonds at the risk-free interest rate."<<endl;
 }
