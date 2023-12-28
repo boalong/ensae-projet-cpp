@@ -1,10 +1,21 @@
 #include <iostream>
+
 #include "european_call.h"
 #include "european_put.h"
+#include "american_put.h"
 #include "asian_call.h"
 #include "asian_put.h"
+#include "barrier_call.h"
+#include "barrier_put.h"
+#include "lookback_call.h"
+#include "lookback_put.h"
+#include "euro_dividend_call.h"
+#include "euro_dividend_put.h"
+
+#include "util.h"
 
 using namespace std;
+
 
 int main()
 {
@@ -20,18 +31,20 @@ int main()
 
     double P1 = test.price_BSM();
     double P2 = test.price_MC(100, 10000);
+    double P3 = test.price_BT(10000);
     double Q1 = TEST.price_BSM();
     double Q2 = TEST.price_MC(100, 10000);
+    double Q3 = TEST.price_BT(10000);
 
     test.replication();
     TEST.replication();
 
     cout<<P1<<endl;
     cout<<P2<<endl;
+    cout<<P3<<endl;
     cout<<Q1<<endl;
     cout<<Q2<<endl;
-
-
+    cout<<Q3<<endl;
 
     asian_call Test(spotprice, strikeprice, maturity, volatility, r);
     asian_put tEST(spotprice, strikeprice, maturity, volatility, r);
@@ -48,3 +61,4 @@ int main()
 
     return 0;
 }
+
