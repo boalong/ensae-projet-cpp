@@ -23,15 +23,18 @@ If you are not using Code::Blocks, our project is
 
 An example of utilisation is included in the main.cpp file. To price an option using a particular method, the process is the following:
 
-- in the main.cpp file, create an instance of the class of the option type you want to price. The names of the classes are following:
-| Option Name | Call Class Name | Put Class Name |
-|:-----------:|:-------------:|:-------------:|
-| **American** | - | american_put |
-| Asian | asian_call | asian_call |
-| Barrier | | |
-| **European** | | |
-| Lookback | | |
+- in the main.cpp file, create an instance of the class of the option type you want to price:
+  
+```
+[name_of_the_option]_[call] example([args]) // for a call option
+```
+
+```
+[name_of_the_option]_[put] example([args]) // for a put option
+```
 
 - then apply a method to compute the price according to the method of your choice. The names of the methods are standardised for each method:
+
 | **Black-Scholes** | **Binomial Tree** | **Monte Carlo** |
-| price_BSM() | price_BT(int N_timesteps) | price(int N_simulations, int N_timesteps) |
+|:-----------:|:-------------:|:-------:|
+| price_BSM() | price_BT(int N_timesteps) | price_MC(int N_simulations, int N_timesteps) |
