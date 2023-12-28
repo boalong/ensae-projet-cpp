@@ -21,6 +21,39 @@ double european_put::price_BSM()
 }
 
 
+double european_put::price_BT(int N)
+{
+    double deltaT = get_maturity()/N;
+    double up = exp(get_volatility() * sqrt(deltaT));
+    double p0 = (up - exp( -r * deltaT )) / ( pow(up, 2) - 1);
+    double p1 = exp( -r * deltaT) - p0;
+
+    double p[N]; // declaration of an array of length N
+
+    // initial values at time T
+    for (int i=0 ; i < N ; i++)
+    {
+        p[i] = get_strikeprice() - get_spotprice() * pow(up, 2*i - N);
+        if (p[i] < 0)
+        {
+            p[i] = 0;
+        }
+    }
+
+    // move to earlier times
+    for (int j=N-1 ; j > 0 ; j--)
+    {
+        for (int i=0 ; i < j ; i++)
+        {
+            // binomial value
+            p[i] = p0 * p[i+1] + p1 * p[i];
+        }
+    }
+
+    return p[0];
+}
+
+
 double european_put::price_MC(int N_timesteps, int N_simulations)
 {
     double sum = 0;
