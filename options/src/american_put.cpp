@@ -1,5 +1,6 @@
 #include "american_put.h"
 #include "util.h"
+
 #include<cmath>
 #include<random>
 #include<ctime>
@@ -48,7 +49,6 @@ double american_put::price_BT(int N)
             }
         }
     }
-
     return p[0];
 }
 
@@ -78,39 +78,6 @@ double american_put::price_MC(int N_timesteps, int N_simulations)
         Path.insert_item(S, i, N_timesteps);
     }
 
-    // Notre matrice Path est remplie
-
-    // Path.print_matrix();
-/*
-    Path.insert_item(1.09, 0, 1);
-    Path.insert_item(1.16, 1, 1);
-    Path.insert_item(1.22, 2, 1);
-    Path.insert_item(0.93, 3, 1);
-    Path.insert_item(1.11, 4, 1);
-    Path.insert_item(0.76, 5, 1);
-    Path.insert_item(0.92, 6, 1);
-    Path.insert_item(0.88, 7, 1);
-
-    Path.insert_item(1.08, 0, 2);
-    Path.insert_item(1.26, 1, 2);
-    Path.insert_item(1.07, 2, 2);
-    Path.insert_item(0.97, 3, 2);
-    Path.insert_item(1.56, 4, 2);
-    Path.insert_item(0.77, 5, 2);
-    Path.insert_item(0.84, 6, 2);
-    Path.insert_item(1.22, 7, 2);
-
-    Path.insert_item(1.34, 0, 3);
-    Path.insert_item(1.54, 1, 3);
-    Path.insert_item(1.03, 2, 3);
-    Path.insert_item(0.92, 3, 3);
-    Path.insert_item(1.52, 4, 3);
-    Path.insert_item(0.90, 5, 3);
-    Path.insert_item(1.01, 6, 3);
-    Path.insert_item(1.34, 7, 3);
-
-    Path.print_matrix();
-*/
     Matrix PotentialPayoffs(N_simulations, N_timesteps+1);
 
     for (int i=0 ; i < N_simulations ; i++)
@@ -121,8 +88,6 @@ double american_put::price_MC(int N_timesteps, int N_simulations)
         }
     }
 
-    // PotentialPayoffs.print_matrix();
-
     int ExerciseTime[N_simulations];
     double PayoffAtExercise[N_simulations];
 
@@ -131,14 +96,6 @@ double american_put::price_MC(int N_timesteps, int N_simulations)
         ExerciseTime[i] = N_timesteps;
         PayoffAtExercise[i] = PotentialPayoffs.get_item(i, N_timesteps);
     }
-
-/*    // Print
-    cout<<endl<<"ExerciseTime and PayoffAtExercise"<<endl;
-    for (int i=0 ; i<N_simulations ; i++)
-    {
-        cout<<ExerciseTime[i]<<" ; "<<PayoffAtExercise[i]<<endl;
-    }
-*/
 
     for (int i = N_timesteps - 1 ; i>0 ; i--)
     {
@@ -155,30 +112,14 @@ double american_put::price_MC(int N_timesteps, int N_simulations)
                 X_index[X_length] = j;
                 Y[X_length] = exp(-get_r() * deltaT * (ExerciseTime[j]-i)) * PayoffAtExercise[j];
                 X_length += 1;
-                // cout<<j<<" ; "<<X[j]<<" ; "<<Y[j]<<endl;
             }
         }
-
-
-
-        // X et Y ne contiennent que des valeurs positives
-
-        // Print X and Y
-
-/*        for (int k=0 ; k<X_length ; k++)
-        {
-            //cout<<X_index[k]<<" ; "<<X[X_index[k]]<<" ; "<<Y[X_index[k]]<<endl;
-            cout<<X_index[k]<<" ; "<<X[k]<<" ; "<<Y[k]<<endl;
-        }
-*/
 
         double alpha;
         double beta;
 
         beta = regressionBeta(Y, X, X_length);
         alpha = mean(Y, X_length) - beta*mean(X, X_length);
-
-        // cout<<"Alpha : "<<alpha<<" ; Beta : "<<beta<<endl;
 
         double PayoffIfExercisedNow[X_length];
         double ExpectedPayoffIfContinues[X_length];
@@ -190,21 +131,11 @@ double american_put::price_MC(int N_timesteps, int N_simulations)
 
             if (PayoffIfExercisedNow[k] > ExpectedPayoffIfContinues[k])
             {
-                ExerciseTime[X_index[k]] = i; // mettre des noms significatifs : i is current timestep
+                ExerciseTime[X_index[k]] = i; // i is current timestep
                 PayoffAtExercise[X_index[k]] = PayoffIfExercisedNow[k];
             }
         }
-/*
-        for (int k = 0 ; k<N_simulations ; k++)
-        {
-            cout<<k<<endl;
-            cout<<"Exercise time : "<<ExerciseTime[k]<<endl;
-            cout<<"PayoffAtExercise : "<<PayoffAtExercise[k]<<endl;
-        }
-
-*/
     }
-
 
     double sum = 0;
     double SimulationValue = 0;
@@ -217,4 +148,3 @@ double american_put::price_MC(int N_timesteps, int N_simulations)
 
     return sum/N_simulations;
 }
-

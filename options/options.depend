@@ -92,7 +92,7 @@
 1703680723 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\option.cpp
 	"option.h"
 
-1703764316 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\main.cpp
+1703793243 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\main.cpp
 	<iostream>
 	"european_call.h"
 	"european_put.h"
@@ -103,6 +103,8 @@
 	"barrier_put.h"
 	"lookback_call.h"
 	"lookback_put.h"
+	"euro_dividend_call.h"
+	"euro_dividend_put.h"
 	"util.h"
 
 1703688380 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\american_call.cpp
@@ -115,7 +117,7 @@
 1703688296 c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\include\american_call.h
 	"option.h"
 
-1703760497 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\american_put.cpp
+1703793380 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\american_put.cpp
 	"american_put.h"
 	"util.h"
 	<cmath>
