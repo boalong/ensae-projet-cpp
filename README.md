@@ -2,9 +2,9 @@
 
 This repository is a work of Marwen Khelifa, Adrien Letellier and Tsitohaina Ravelomanana for the 2023-2024 C++ course project at ENSAE.
 
-We implemented options pricing algorithms using [Black-Scholes], [Binomial Trees] and [Monte Carlo] models for various vanilla and exotic options.
+We implemented options pricing algorithms using Black-Scholes, Binomial Trees and Monte Carlo models for various vanilla and exotic options.
 
-| Option Name | Black-Scholes | Binomial Tree | Monte Carlo |
+| Option Name | Black-Scholes | Binomial Trees | Monte Carlo |
 |:-----------:|:-------------:|:-------:|:-----------:|
 | *Example* | *:white_check_mark: (supported)* | *:x: (not supported)* | *- (not applicable)* |
 | **American** | - | :white_check_mark: | :white_check_mark: |
@@ -29,8 +29,8 @@ An example of utilisation is included in the main.cpp file. To price an option u
 | **American** | - | american_put |
 | Asian | asian_call | asian_call |
 | Barrier | | |
-| **European** |  | |
-| Lookback |  | |
+| **European** | | |
+| Lookback | | |
 
 - then apply a method to compute the price according to the method of your choice. The names of the methods are standardised for each method:
 | **Black-Scholes** | **Binomial Tree** | **Monte Carlo** |
