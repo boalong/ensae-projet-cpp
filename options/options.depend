@@ -92,13 +92,17 @@
 1703680723 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\option.cpp
 	"option.h"
 
-1703725393 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\main.cpp
+1703764316 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\main.cpp
 	<iostream>
 	"european_call.h"
 	"european_put.h"
+	"american_put.h"
 	"asian_call.h"
 	"asian_put.h"
-	"american_put.h"
+	"barrier_call.h"
+	"barrier_put.h"
+	"lookback_call.h"
+	"lookback_put.h"
 	"util.h"
 
 1703688380 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\american_call.cpp
@@ -111,7 +115,7 @@
 1703688296 c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\include\american_call.h
 	"option.h"
 
-1703723588 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\american_put.cpp
+1703760497 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\american_put.cpp
 	"american_put.h"
 	"util.h"
 	<cmath>
@@ -123,11 +127,71 @@
 1703713163 c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\include\american_put.h
 	"option.h"
 
-1703723335 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\util.cpp
+1703758704 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\util.cpp
 	"util.h"
 	<iostream>
 	<cstring>
 	<algorithm>
 
-1703723038 c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\include\util.h
+1703753115 c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\include\util.h
+
+1703764422 c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\include\barrier_call.h
+	"option.h"
+
+1703764377 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\barrier_call.cpp
+	"barrier_call.h"
+	<cmath>
+	<ctime>
+	<iostream>
+	<random>
+
+1703764449 c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\include\barrier_put.h
+	"option.h"
+
+1703764489 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\barrier_put.cpp
+	"barrier_put.h"
+	<cmath>
+	<ctime>
+	<iostream>
+	<random>
+
+1703763883 c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\include\lookback_call.h
+	"option.h"
+
+1703764029 c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\include\lookback_put.h
+	"option.h"
+
+1703764525 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\lookback_call.cpp
+	"lookback_call.h"
+	<cmath>
+	<ctime>
+	<iostream>
+	<random>
+
+1703764523 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\lookback_put.cpp
+	"lookback_put.h"
+	<cmath>
+	<ctime>
+	<iostream>
+	<random>
+
+1703765875 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\euro_dividend_call.cpp
+	"euro_dividend_call.h"
+	<cmath>
+	<ctime>
+	<iostream>
+	<random>
+
+1703765691 c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\include\euro_dividend_call.h
+	"option.h"
+
+1703766122 source:c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\src\euro_dividend_put.cpp
+	"euro_dividend_put.h"
+	<cmath>
+	<ctime>
+	<iostream>
+	<random>
+
+1703766154 c:\users\letellier\desktop\projet c++\ensae-projet-cpp\options\include\euro_dividend_put.h
+	"option.h"
 

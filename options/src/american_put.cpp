@@ -55,11 +55,11 @@ double american_put::price_BT(int N)
 
 double american_put::price_MC(int N_timesteps, int N_simulations)
 {
-    Matrix Path(N_simulations, N_timesteps);
+    Matrix Path(N_simulations, N_timesteps+1);
     double S;
 
-    double deltaT = get_maturity() / N_simulations;
-    cout<<deltaT<<endl;
+    double deltaT = get_maturity() / N_timesteps;
+    // cout<<deltaT<<endl;
 
     double gauss;
 
@@ -75,81 +75,146 @@ double american_put::price_MC(int N_timesteps, int N_simulations)
             gauss = distribution(generator);
             S *= exp((get_r() - 0.5 * get_volatility() * get_volatility()) * (get_maturity() / N_timesteps) + get_volatility() * sqrt(get_maturity() / N_timesteps) * gauss);
         }
+        Path.insert_item(S, i, N_timesteps);
     }
 
     // Notre matrice Path est remplie
 
+    // Path.print_matrix();
+/*
+    Path.insert_item(1.09, 0, 1);
+    Path.insert_item(1.16, 1, 1);
+    Path.insert_item(1.22, 2, 1);
+    Path.insert_item(0.93, 3, 1);
+    Path.insert_item(1.11, 4, 1);
+    Path.insert_item(0.76, 5, 1);
+    Path.insert_item(0.92, 6, 1);
+    Path.insert_item(0.88, 7, 1);
+
+    Path.insert_item(1.08, 0, 2);
+    Path.insert_item(1.26, 1, 2);
+    Path.insert_item(1.07, 2, 2);
+    Path.insert_item(0.97, 3, 2);
+    Path.insert_item(1.56, 4, 2);
+    Path.insert_item(0.77, 5, 2);
+    Path.insert_item(0.84, 6, 2);
+    Path.insert_item(1.22, 7, 2);
+
+    Path.insert_item(1.34, 0, 3);
+    Path.insert_item(1.54, 1, 3);
+    Path.insert_item(1.03, 2, 3);
+    Path.insert_item(0.92, 3, 3);
+    Path.insert_item(1.52, 4, 3);
+    Path.insert_item(0.90, 5, 3);
+    Path.insert_item(1.01, 6, 3);
+    Path.insert_item(1.34, 7, 3);
+
     Path.print_matrix();
+*/
+    Matrix PotentialPayoffs(N_simulations, N_timesteps+1);
 
-    double inTheMoney[N_simulations];
-    double maxPayoff[N_simulations];
-    double expectedCashFlowFromContinuing[N_simulations];
-
-    for (int i=N_timesteps-1 ; i > 0 ; i--) // Should the option be exercised at time i?
+    for (int i=0 ; i < N_simulations ; i++)
     {
-        for (int j=0 ; i<N_simulations ; j++)
+        for (int j=0 ; j < N_timesteps+1 ; j++)
         {
-            if (get_strikeprice() > Path.get_item(j, i))
-            {
-                inTheMoney[j] = Path.get_item(j, i);
-            }
-            else
-            {
-                inTheMoney[j] = 0.0;
-            }
-        }
-
-    }
-
-    Matrix PayoffIfNotExercised(N_simulations, N_timesteps - 1);
-
-    // Remplir la matrice des PayoffIfNotExercised
-    for (int i=0 ; i<N_simulations ; i++)
-    {
-        for (int j=0 ; j<N_timesteps - 1 ; j++)
-        {
-            PayoffIfNotExercised.insert_item(exp(-get_r()*deltaT) * max(get_strikeprice() - Path.get_item(i, j+1), 0.0), i, j);
+            PotentialPayoffs.insert_item( max(get_strikeprice() - Path.get_item(i, j), 0.0) , i, j);
         }
     }
 
-    PayoffIfNotExercised.print_matrix();
+    // PotentialPayoffs.print_matrix();
 
-    // To make the regression, we only keep the in-the-money rows
-    double X[N_simulations];
-    int X_index[N_simulations];
-
-    for (int j=0 ; j<N_timesteps - 1 ; j++)
-    {
-        for (int i=0 ; i<N_simulations ; i++)
-        {
-            if (get_strikeprice() - Path.get_item(i, j) > 0) // in-the-money
-            {
-                X[i] = get_strikeprice() - Path.get_item(i, j);
-                X_index[i] = 1; // hash
-            }
-        }
-    }
+    int ExerciseTime[N_simulations];
+    double PayoffAtExercise[N_simulations];
 
     for (int i=0 ; i<N_simulations ; i++)
     {
-        cout<<X[i]<<endl;
-        cout<<X_index[i]<<endl;
+        ExerciseTime[i] = N_timesteps;
+        PayoffAtExercise[i] = PotentialPayoffs.get_item(i, N_timesteps);
+    }
+
+/*    // Print
+    cout<<endl<<"ExerciseTime and PayoffAtExercise"<<endl;
+    for (int i=0 ; i<N_simulations ; i++)
+    {
+        cout<<ExerciseTime[i]<<" ; "<<PayoffAtExercise[i]<<endl;
+    }
+*/
+
+    for (int i = N_timesteps - 1 ; i>0 ; i--)
+    {
+        double X[N_simulations];
+        int X_index[N_simulations];
+        int X_length = 0;
+        double Y[N_simulations];
+
+        for (int j = 0 ; j<N_simulations ; j++)
+        {
+            if (PotentialPayoffs.get_item(j, i) > 0.0)
+            {
+                X[X_length] = Path.get_item(j, i);
+                X_index[X_length] = j;
+                Y[X_length] = exp(-get_r() * deltaT * (ExerciseTime[j]-i)) * PayoffAtExercise[j];
+                X_length += 1;
+                // cout<<j<<" ; "<<X[j]<<" ; "<<Y[j]<<endl;
+            }
+        }
+
+
+
+        // X et Y ne contiennent que des valeurs positives
+
+        // Print X and Y
+
+/*        for (int k=0 ; k<X_length ; k++)
+        {
+            //cout<<X_index[k]<<" ; "<<X[X_index[k]]<<" ; "<<Y[X_index[k]]<<endl;
+            cout<<X_index[k]<<" ; "<<X[k]<<" ; "<<Y[k]<<endl;
+        }
+*/
+
+        double alpha;
+        double beta;
+
+        beta = regressionBeta(Y, X, X_length);
+        alpha = mean(Y, X_length) - beta*mean(X, X_length);
+
+        // cout<<"Alpha : "<<alpha<<" ; Beta : "<<beta<<endl;
+
+        double PayoffIfExercisedNow[X_length];
+        double ExpectedPayoffIfContinues[X_length];
+
+        for (int k = 0 ; k<X_length ; k++)
+        {
+            PayoffIfExercisedNow[k] = get_strikeprice() - X[k];
+            ExpectedPayoffIfContinues[k] = alpha + beta*X[k];
+
+            if (PayoffIfExercisedNow[k] > ExpectedPayoffIfContinues[k])
+            {
+                ExerciseTime[X_index[k]] = i; // mettre des noms significatifs : i is current timestep
+                PayoffAtExercise[X_index[k]] = PayoffIfExercisedNow[k];
+            }
+        }
+/*
+        for (int k = 0 ; k<N_simulations ; k++)
+        {
+            cout<<k<<endl;
+            cout<<"Exercise time : "<<ExerciseTime[k]<<endl;
+            cout<<"PayoffAtExercise : "<<PayoffAtExercise[k]<<endl;
+        }
+
+*/
     }
 
 
+    double sum = 0;
+    double SimulationValue = 0;
 
+    for (int i = 0 ; i < N_simulations ; i++)
+    {
+        SimulationValue = PayoffAtExercise[i] * exp( -r * deltaT * ExerciseTime[i] ) ; // discounted cashflow
+        sum += SimulationValue;
+    }
 
-
-
-
-
-        // we want to compute value of the option at time 0
-
-        // we have to create matrix
-
-
-        // for the regression, we will have to check that the matrix is invertible
-
-
+    return sum/N_simulations;
 }
 

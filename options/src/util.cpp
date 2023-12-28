@@ -86,10 +86,23 @@ double covariance(double* X, double* Y, int length)
         sum_Y += Y[i];
     }
 
-    return sum_XY - sum_X * sum_Y;
+    return (1/static_cast<double>(length)) * sum_XY - (1/static_cast<double>(length)) * sum_X * (1/static_cast<double>(length)) * sum_Y;
 }
 
-double regressionCoefficient(double* Y, double* X, int length)
+double regressionBeta(double* Y, double* X, int length)
 {
     return covariance(X, Y, length) / covariance(X, X, length);
 }
+
+double mean(double* X, int length)
+{
+    double sum = 0;
+
+    for (int i=0 ; i<length ; i++)
+    {
+        sum += X[i];
+    }
+
+    return sum/length;
+}
+

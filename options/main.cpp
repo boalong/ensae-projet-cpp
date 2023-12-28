@@ -1,9 +1,16 @@
 #include <iostream>
 #include "european_call.h"
 #include "european_put.h"
+#include "american_put.h"
 #include "asian_call.h"
 #include "asian_put.h"
-#include "american_put.h"
+#include "barrier_call.h"
+#include "barrier_put.h"
+#include "lookback_call.h"
+#include "lookback_put.h"
+#include "euro_dividend_call.h"
+#include "euro_dividend_put.h"
+
 #include "util.h"
 
 using namespace std;
@@ -11,8 +18,55 @@ using namespace std;
 
 int main()
 {
+    double spotprice = 100.0;
+    double strikeprice = 100.0;
+    double maturity = 1.0;
+    double volatility = 0.2;
+    double r = 0.05;
+    double dividend = 0.02;
+    euro_dividend_call euro_call(spotprice, strikeprice, maturity, volatility, r, dividend);
+
+    int N_timesteps = 250;
+    int N_simulations = 10000;
+
+    double mc_price = euro_call.price_MC(N_timesteps, N_simulations);
+    double bsm_price = euro_call.price_BSM();
+
+    cout << "Monte Carlo Price: " << mc_price << endl;
+    cout << "Black-Scholes-Merton Price: " << bsm_price << endl;
+
+    return 0;
+}
+
+
+int main6()
+{
+    lookback_call lookbackPut(100.0, 90.0, 1.0, 0.2, 0.05);
+
+    double lookbackPrice = lookbackPut.price_MC(10000, 252);
+    cout << "Lookback Option Price: " << lookbackPrice << endl;
+    return 0;
+}
+
+int main8()
+{
+  barrier_call Option(90.0, 60.0, 1.0, 0.2, 0.05, 1, 0, 80.0);
+  double result = Option.price_MC(10000, 100);
+  if (result != -1) {
+    cout << "Price is "<<result << endl;
+  } else {
+    cout << "Error in pricing option." << endl;
+  }
+  return 0;
+}
+
+
+
+int main5()
+{
     american_put test(1.0, 1.1, 3, 0.20, 0.06);
-    test.price_MC(3, 8);
+    cout<<test.price_MC(100, 10000)<<endl;
+    cout<<test.price_BT(10000);
     return 0;
 }
 

@@ -30,6 +30,7 @@ class Matrix
 };
 
 double covariance(double* X, double* Y, int length);
-double regressionCoefficient(double* Y, double* X, int length); // Simple OLS regression of Y on X
+double regressionBeta(double* Y, double* X, int length); // Simple OLS regression of Y on X
+double mean(double* X, int length);
 
 #endif // UTIL_H
