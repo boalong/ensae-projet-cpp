@@ -4,20 +4,25 @@ This repository is a work of Marwen Khelifa, Adrien Letellier and Tsitohaina Rav
 
 We implemented options pricing algorithms using Black-Scholes, Binomial Trees and Monte Carlo models for various vanilla and exotic options.
 
-| Option Name | Black-Scholes | Binomial Trees | Monte Carlo |
-|:-----------:|:-------------:|:-------:|:-----------:|
-| *Example* | *:white_check_mark: (supported)* | *:x: (not supported)* | *- (not applicable)* |
-| **American** | - | :white_check_mark: | :white_check_mark: |
-| Asian | :white_check_mark: | :x: | :white_check_mark: |
-| Barrier | :x: | :x: | :white_check_mark: |
-| **European** | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Lookback | :white_check_mark: | :white_check_mark: | :x: |
+We also implemented replication strategy for European options without dividends.
+
+| Option Name | Black-Scholes | Binomial Trees | Monte Carlo | Replication Strategy |
+|:-----------:|:-------------:|:-------:|:-----------:|:-----------:|
+| *Example* | *:white_check_mark: (supported)* | *:x: (not supported)* | *- (not applicable)* | |
+| **American** | - | :white_check_mark: | :white_check_mark: | :x: |
+| Asian | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| Barrier | :x: | :x: | :white_check_mark: | :x: |
+| **European** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| European with dividends | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| Lookback | :x: | :x: | :white_check_mark: | :x: |
 
 ## How to use our repository?
 
-We worked mainly with Code::Blocks, so our project is available as a .cbp file.
+We worked mainly with Code::Blocks, so our project is avaible to be used in Code::Blocks using the folder *codeblocks*.
 
-If you are not using Code::Blocks, our project is
+If you are not using Code::Blocks, our project is also avaible if you use Linux using the folder *manually* with contains a Makefile.
+
+If this method does not work, you can use our project on this online C++ compiler: https://onlinegdb.com/jBLR1ynp8.
 
 ## How to run algorithms?
 
