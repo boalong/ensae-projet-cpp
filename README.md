@@ -9,7 +9,7 @@ We also implemented replication strategy for European options without dividends.
 | Option Name | Black-Scholes | Binomial Tree | Monte Carlo | Replication Strategy |
 |:-----------:|:-------------:|:-------:|:-----------:|:-----------:|
 | *Example* | *:white_check_mark: (supported)* | *:x: (not supported)* | *- (not applicable)* | |
-| **American** | - | :white_check_mark: | :white_check_mark: | :x: |
+| **American** | :x: | :white_check_mark: | :white_check_mark: | :x: |
 | Asian | :white_check_mark: | :x: | :white_check_mark: | :x: |
 | Barrier | :x: | :x: | :white_check_mark: | :x: |
 | **European** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
