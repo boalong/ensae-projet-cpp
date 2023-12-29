@@ -27,30 +27,33 @@ int main()
     double r = 0.02;
     double dividend = 0.01;
 
+    cout<<"==========================================="<<endl;
     cout<<"Default values for the option's parameters:" << endl;
-    cout<<"===========================================" << endl << endl;
-    cout<<"Spot price: " << spotprice << endl;
-    cout<<"Strike price: " << strikeprice << endl;
-    cout<<"Maturity (years): " << maturity << endl;
-    cout<<"Volatility: " << volatility << endl;
-    cout<<"Risk-free interest rate: " << r << endl; 
-    cout<<"Annual dividend rate: " << dividend << endl << endl; 
-    
+    cout<<"===========================================" << endl;
+    cout<<"     Spot price: " << spotprice << endl;
+    cout<<"     Strike price: " << strikeprice << endl;
+    cout<<"     Maturity (years): " << maturity << endl;
+    cout<<"     Volatility: " << volatility << endl;
+    cout<<"     Risk-free interest rate: " << r << endl;
+    cout<<"     Annual dividend rate: " << dividend<<endl;
+    cout<<"==========================================="<<endl<<endl;
+
 
     // European options testing
 
     european_call EuropeanCall(spotprice, strikeprice, maturity, volatility, r);
-    european_put EureopeanPut(spotprice, strikeprice, maturity, volatility, r);
+    european_put EuropeanPut(spotprice, strikeprice, maturity, volatility, r);
 
     cout<<"European call, Black-Scholes: "<<EuropeanCall.price_BSM()<<endl;
     cout<<"European call, Binomial Tree with 10000 timesteps: "<<EuropeanCall.price_BT(10000)<<endl;
     cout<<"European call, Monte Carlo with 100 simulations, 10000 timesteps: "<<EuropeanCall.price_MC(100, 10000)<<endl;
-    cout<<"European call, Replication strategy: "<<EuropeanCall.replication();
+    EuropeanCall.replication();
 
     cout<<"European put, Black-Scholes: "<<EuropeanPut.price_BSM()<<endl;
     cout<<"European put, Binomial Tree with 10000 timesteps: "<<EuropeanPut.price_BT(10000)<<endl;
-    cout<<"European put, Monte Carlo with 100 simulations, 10000 timesteps: "<<EuropeanPut.price_MC(100, 10000)<<endl<<endl;
-    cout<<"European put, Replication strategy: "<<EuropeanPut.replication();
+    cout<<"European put, Monte Carlo with 100 simulations, 10000 timesteps: "<<EuropeanPut.price_MC(100, 10000)<<endl;
+    EuropeanPut.replication();
+    cout<<endl;
 
 
     // Asian options testing
@@ -64,7 +67,7 @@ int main()
     cout<<"Asian put, Black-Scholes: "<<AsianPut.price_BSM()<<endl;
     cout<<"Asian put, Monte Carlo with 100 simulations, 10000 timesteps: "<<AsianPut.price_MC(100, 10000)<<endl<<endl;
 
-    
+
     // American options testing
 
     american_put AmericanPut(spotprice, strikeprice, maturity, volatility, r);
@@ -72,7 +75,7 @@ int main()
     cout<<"American put, Binomial Tree with 1000 timesteps: "<<AmericanPut.price_BT(1000)<<endl;
     cout<<"American put, Monte Carlo with 100 simulations, 10000 timesteps: "<<AmericanPut.price_MC(100, 10000)<<endl<<endl;
 
-    
+
     // European options with dividends testing
 
     euro_dividend_call EuroDividendCall(spotprice, strikeprice, maturity, volatility, r, dividend);
@@ -96,7 +99,7 @@ int main()
 
 
     // Lookback options testing
-    
+
     lookback_call LookbackCall(spotprice, strikeprice, maturity, volatility, r);
     lookback_put LookbackPut(spotprice, strikeprice, maturity, volatility, r);
 
@@ -104,7 +107,7 @@ int main()
 
     cout<<"Lookback put, Monte Carlo with 100 simulations, 10000 timesteps: "<<LookbackPut.price_MC(100, 10000)<<endl<<endl;
 
-    
+
     return 0;
 }
 
