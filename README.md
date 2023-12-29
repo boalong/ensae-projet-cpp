@@ -26,7 +26,7 @@ Here is a list of all options and methods available in our repository:
 
 - If not using Code::Blocks, the project can be accessed manually using the 'Makefile' in the *manually* folder.
 
-- An online C++ compiler link is provided for further accessibility: [https://onlinegdb.com/sapIejniQ](https://onlinegdb.com/sapIejniQ)
+- An online C++ compiler link is provided for further accessibility: [https://onlinegdb.com/PQjal5Yps](https://onlinegdb.com/PQjal5Yps)
 
 ## How to run algorithms?
 
