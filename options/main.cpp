@@ -25,6 +25,7 @@ int main()
     double maturity = 1;
     double volatility = 0.2;
     double r = 0.02;
+    double dividend = 0.01;
 
     european_call test(spotprice, strikeprice, maturity, volatility, r);
     european_put TEST(spotprice, strikeprice, maturity, volatility, r);
@@ -58,6 +59,30 @@ int main()
     cout<<p2<<endl;
     cout<<q1<<endl;
     cout<<q2<<endl;
+
+
+    euro_dividend_put test1(spotprice, strikeprice, maturity, volatility, r, dividend);
+    euro_dividend_call test2(spotprice, strikeprice, maturity, volatility, r, dividend);
+
+    cout<<test1.price_BSM()<<endl;
+    cout<<test1.price_MC(100, 1000)<<endl;
+    cout<<test2.price_BSM()<<endl;
+    cout<<test2.price_MC(100, 1000)<<endl;
+
+    barrier_call test3(spotprice, strikeprice, maturity, volatility, r, 1, 1, 75.0); //up-and-in call, barrier is 75
+    barrier_put test4(spotprice, strikeprice, maturity, volatility, r, 0, 1, 75.0); //up-and-out put, barrier is 75
+    
+    double R1 = test3.price_MC(100, 1000);
+    double R2 = test4.price_MC(100, 1000);
+    
+    cout<<R1<<endl;
+    cout<<R2<<endl;
+
+    lookback_call test5(spotprice, strikeprice, maturity, volatility, r);
+    lookback_put test6(spotprice, strikeprice, maturity, volatility, r);
+
+    cout<<test5.price_MC(100, 1000)<<endl;
+    cout<<test6.price_MC(100, 1000)<<endl;
 
     return 0;
 }
