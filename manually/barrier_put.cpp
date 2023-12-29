@@ -35,7 +35,6 @@ double barrier_put::price_MC(int numTimeSteps, int numSimulations)
       cout << "Barrier is lower than the initial price" << endl;
       return -1;
     } else {
-      cout << "This is an up-and-in Put" << endl;
       for (int i = 0; i < numSimulations; i++) {
         double S = get_spotprice();
 
@@ -59,7 +58,6 @@ double barrier_put::price_MC(int numTimeSteps, int numSimulations)
       cout << "Barrier is lower than the initial price" << endl;
       return -1;
     } else {
-      cout << "This is an up-and-out Put" << endl;
       for (int i = 0; i < numSimulations; i++) {
         double S = get_spotprice();
 
@@ -85,7 +83,6 @@ double barrier_put::price_MC(int numTimeSteps, int numSimulations)
       cout << "Barrier is higher than the initial price" << endl;
       return -1;
     }
-    cout << "This is a down-and-out Put" << endl;
     for (int i = 0; i < numSimulations; i++) {
       double S = get_spotprice();
 
@@ -110,7 +107,6 @@ double barrier_put::price_MC(int numTimeSteps, int numSimulations)
       cout << "Barrier is higher than the initial price" << endl;
       return -1;
     }
-    cout << "This is a down-and-in Put" << endl;
     for (int i = 0; i < numSimulations; i++) {
       double S = get_spotprice();
 
