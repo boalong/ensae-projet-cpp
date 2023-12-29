@@ -44,6 +44,6 @@ An example of utilisation is included in the main.cpp file. To price an option u
 ```
 cout<<example.price_BSM()<<endl; // for Black-Scholes method
 cout<<example.price_BT(10000)<<endl; // for Binomial Tree method with 10000 timesteps
-cout<<example.price_MC(100, 10000)<<endl; // for Monte Carlo method with 100 simulations and 10000 timesteps
+cout<<example.price_MC(100, 10000)<<endl; // for Monte Carlo method with 100 timesteps and 10000 simulations
 example.replication(); // for Replication Strategy. Note: .replication() is a void function
 ```
