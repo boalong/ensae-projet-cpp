@@ -6,6 +6,9 @@ We implemented options pricing algorithms using Black-Scholes, Binomial Tree and
 
 We also implemented replication strategy for European options without dividends.
 
+Here is a list of all options and methods available in our repository:
+
+
 | Option Name | Black-Scholes | Binomial Tree | Monte Carlo | Replication Strategy |
 |:-----------:|:-------------:|:-------:|:-----------:|:-----------:|
 | *Example* | *:white_check_mark: (supported)* | *:x: (not supported)* | *- (not applicable)* | |
@@ -16,6 +19,7 @@ We also implemented replication strategy for European options without dividends.
 | European with dividends | :white_check_mark: | :x: | :white_check_mark: | :x: |
 | Lookback | :x: | :x: | :white_check_mark: | :x: |
 
+
 ## How to use our repository?
 
 - We worked mainly with Code::Blocks, so our project is avaible to be used in Code::Blocks using the folder *codeblocks*.
@@ -23,6 +27,7 @@ We also implemented replication strategy for European options without dividends.
 - If you are not using Code::Blocks, our project is also avaible using the folder *manually* with contains a Makefile.
 
 - If this method does not work, you can use our project on this online C++ compiler: https://onlinegdb.com/jBLR1ynp8.
+
 
 ## How to run algorithms?
 
@@ -32,9 +37,6 @@ An example of utilisation is included in the main.cpp file. To price an option u
   
 ```
 [name_of_the_option]_[call] example([args]); // for a call option
-```
-
-```
 [name_of_the_option]_[put] example([args]); // for a put option
 ```
 
