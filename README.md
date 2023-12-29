@@ -2,9 +2,9 @@
 
 This repository is a work of Marwen Khelifa, Adrien Letellier and Tsitohaina Ravelomanana for the 2023-2024 C++ course project at ENSAE.
 
-We implemented options pricing algorithms using Black-Scholes, Binomial Tree and Monte Carlo models for various vanilla and exotic options.
+It contains implementations of options pricing algorithms using Black-Scholes, Binomial Tree, and Monte Carlo models for various vanilla and exotic options.
 
-We also implemented replication strategy for European options without dividends.
+Additionally, a replication strategy for European options without dividends has been implemented.
 
 Here is a list of all options and methods available in our repository:
 
@@ -22,29 +22,28 @@ Here is a list of all options and methods available in our repository:
 
 ## How to use our repository?
 
-- We worked mainly with Code::Blocks, so our project is avaible to be used in Code::Blocks using the folder *codeblocks*.
+- For Code::Blocks users, the project is available in the *codeblocks* folder.
 
-- If you are not using Code::Blocks, our project is also avaible using the folder *manually* with contains a Makefile.
+- If not using Code::Blocks, the project can be accessed manually using the 'Makefile' in the *manually* folder.
 
-- If this method does not work, you can use our project on this online C++ compiler: https://onlinegdb.com/jBLR1ynp8.
-
+- An online C++ compiler link is provided for further accessibility: [https://onlinegdb.com/jBLR1ynp8](https://onlinegdb.com/jBLR1ynp8)
 
 ## How to run algorithms?
 
-An example of utilisation is included in the main.cpp file. To price an option using a particular method, the process is the following:
+An example of utilisation is included in the main.cpp file. To price an option using a specific method, the process is the following:
 
-- in the main.cpp file, create an instance of the class of the option type you want to price:
+1. Create an instance of the class of the option type you want to price in the main.cpp file:
   
 ```
 [name_of_the_option]_[call] example([args]); // for a call option
 [name_of_the_option]_[put] example([args]); // for a put option
 ```
 
-- then apply a method to compute the price according to the method of your choice. The names of the methods are standardised for each method:
+2. Apply a method to compute the price according to the chosen method. The names of the methods are standardised for each method:
 
 ```
 cout<<example.price_BSM()<<endl; // for Black-Scholes method
 cout<<example.price_BT(10000)<<endl; // for Binomial Tree method with 10000 timesteps
 cout<<example.price_MC(100, 10000)<<endl; // for Monte Carlo method with 100 simulations and 10000 timesteps
-example.replication(); // for Replication Strategy. Be careful: .replication() is a void
+example.replication(); // for Replication Strategy. Note: .replication() is a void function
 ```
