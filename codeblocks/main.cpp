@@ -25,6 +25,7 @@ int main()
     double maturity = 1;
     double volatility = 0.2;
     double r = 0.02;
+    double dividend = 0.01;
 
     european_call test(spotprice, strikeprice, maturity, volatility, r);
     european_put TEST(spotprice, strikeprice, maturity, volatility, r);
@@ -64,37 +65,29 @@ int main()
     cout << AmPut.price_BT(1000)<<endl;
     cout << AmPut.price_MC(100, 1000)<<endl;
 
-    barrier_call Option(120.0, 65.0, 1.0, 0.2, 0.05, 1, 0, 80.0);
-    double result = Option.price_MC(100, 10000);
-    if (result != -1)
-    {
-        cout << "Price is "<<result << endl;
-    }
-    else
-    {
-        cout << "Error in pricing option." << endl;
-    }
+    euro_dividend_put test1(spotprice, strikeprice, maturity, volatility, r, dividend);
+    euro_dividend_call test2(spotprice, strikeprice, maturity, volatility, r, dividend);
 
-    barrier_put Option2(90.0, 95.0, 1.0, 0.2, 0.05, 1, 0, 80.0);
-    double result2 = Option2.price_MC(100, 10000);
-    if (result != -1)
-    {
-        cout << "Price is "<<result2 << endl;
-    }
-    else
-    {
-        cout << "Error in pricing option." << endl;
-    }
+    cout<<test1.price_BSM()<<endl;
+    cout<<test1.price_MC(100, 1000)<<endl;
+    cout<<test2.price_BSM()<<endl;
+    cout<<test2.price_MC(100, 1000)<<endl;
 
-    lookback_put lookbackPut(100.0, 90.0, 1.0, 0.2, 0.05);
+    barrier_call test3(spotprice, strikeprice, maturity, volatility, r, 1, 1, 75.0); //up-and-in call, barrier is 75
+    barrier_put test4(spotprice, strikeprice, maturity, volatility, r, 0, 1, 75.0); //up-and-out put, barrier is 75
 
-    double lookbackPrice = lookbackPut.price_MC(100, 10000);
-    cout << "Lookback Option Price: " << lookbackPrice << endl;
+    double R1 = test3.price_MC(100, 1000);
+    double R2 = test4.price_MC(100, 1000);
 
-    lookback_call lookbackCall(100.0, 90.0, 1.0, 0.2, 0.05);
+    cout<<R1<<endl;
+    cout<<R2<<endl;
 
-    double lookbackPrice2 = lookbackCall.price_MC(100, 10000);
-    cout << "Lookback Option Price: " << lookbackPrice2 << endl;
+    lookback_call test5(spotprice, strikeprice, maturity, volatility, r);
+    lookback_put test6(spotprice, strikeprice, maturity, volatility, r);
+
+    cout<<test5.price_MC(100, 1000)<<endl;
+    cout<<test6.price_MC(100, 1000)<<endl;
+
 
     return 0;
 }
