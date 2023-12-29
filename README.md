@@ -18,11 +18,11 @@ We also implemented replication strategy for European options without dividends.
 
 ## How to use our repository?
 
-We worked mainly with Code::Blocks, so our project is avaible to be used in Code::Blocks using the folder *codeblocks*.
+- We worked mainly with Code::Blocks, so our project is avaible to be used in Code::Blocks using the folder *codeblocks*.
 
-If you are not using Code::Blocks, our project is also avaible if you use Linux using the folder *manually* with contains a Makefile.
+- If you are not using Code::Blocks, our project is also avaible using the folder *manually* with contains a Makefile.
 
-If this method does not work, you can use our project on this online C++ compiler: https://onlinegdb.com/jBLR1ynp8.
+- If this method does not work, you can use our project on this online C++ compiler: https://onlinegdb.com/jBLR1ynp8.
 
 ## How to run algorithms?
 
