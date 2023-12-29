@@ -45,10 +45,12 @@ int main()
     cout<<"European call, Black-Scholes: "<<EuropeanCall.price_BSM()<<endl;
     cout<<"European call, Binomial Tree with 10000 timesteps: "<<EuropeanCall.price_BT(10000)<<endl;
     cout<<"European call, Monte Carlo with 100 simulations, 10000 timesteps: "<<EuropeanCall.price_MC(100, 10000)<<endl;
+    cout<<"European call, Replication strategy: "<<EuropeanCall.replication();
 
     cout<<"European put, Black-Scholes: "<<EuropeanPut.price_BSM()<<endl;
     cout<<"European put, Binomial Tree with 10000 timesteps: "<<EuropeanPut.price_BT(10000)<<endl;
     cout<<"European put, Monte Carlo with 100 simulations, 10000 timesteps: "<<EuropeanPut.price_MC(100, 10000)<<endl<<endl;
+    cout<<"European put, Replication strategy: "<<EuropeanPut.replication();
 
 
     // Asian options testing
@@ -67,79 +69,42 @@ int main()
 
     american_put AmericanPut(spotprice, strikeprice, maturity, volatility, r);
 
-    cout<<"American put, Binomial Tree with 10000 timesteps: "<<AmericanPut.price_BT(10000)<<endl;
+    cout<<"American put, Binomial Tree with 1000 timesteps: "<<AmericanPut.price_BT(1000)<<endl;
     cout<<"American put, Monte Carlo with 100 simulations, 10000 timesteps: "<<AmericanPut.price_MC(100, 10000)<<endl<<endl;
 
     
     // European options with dividends testing
 
-    euro_dividend_put EuroDividendPut(spotprice, strikeprice, maturity, volatility, r, dividend);
     euro_dividend_call EuroDividendCall(spotprice, strikeprice, maturity, volatility, r, dividend);
+    euro_dividend_put EuroDividendPut(spotprice, strikeprice, maturity, volatility, r, dividend);
+
+    cout<<"European call with dividends, Black-Scholes: "<<EuroDividendCall.price_BSM()<<endl;
+    cout<<"European call with dividends, Monte Carlo with 100 simulations, 10000 timesteps: "<<EuroDividendCall.price_MC(100, 10000)<<endl;
+
+    cout<<"European put with dividends, Black-Scholes: "<<EuroDividendPut.price_BSM()<<endl;
+    cout<<"European put with dividends, Monte Carlo with 100 simulations, 10000 timesteps: "<<EuroDividendPut.price_MC(100, 10000)<<endl<<endl;
+
 
     // Barrier options testing
 
     barrier_call BarrierCall(spotprice, strikeprice, maturity, volatility, r, 1, 1, 75.0); //up-and-in call, barrier is 75
     barrier_put BarrierPut(spotprice, strikeprice, maturity, volatility, r, 0, 1, 75.0); //up-and-out put, barrier is 75
 
+    cout<<"Barrier call (up-and-in call, barrier is 75), Monte Carlo with 100 simulations, 10000 timesteps: "<<BarrierCall.price_MC(100, 10000)<<endl;
+
+    cout<<"Barrier put (up-and-out put, barrier is 75), Monte Carlo with 100 simulations, 10000 timesteps: "<<BarrierPut.price_MC(100, 10000)<<endl<<endl;
+
+
     // Lookback options testing
     
     lookback_call LookbackCall(spotprice, strikeprice, maturity, volatility, r);
     lookback_put LookbackPut(spotprice, strikeprice, maturity, volatility, r);
 
+    cout<<"Lookback call, Monte Carlo with 100 simulations, 10000 timesteps: "<<LookbackCall.price_MC(100, 10000)<<endl;
 
-    double P1 = test.price_BSM();
-    double P2 = test.price_MC(100, 10000);
-    double P3 = test.price_BT(10000);
-    double Q1 = TEST.price_BSM();
-    double Q2 = TEST.price_MC(100, 10000);
-    double Q3 = TEST.price_BT(10000);
+    cout<<"Lookback put, Monte Carlo with 100 simulations, 10000 timesteps: "<<LookbackPut.price_MC(100, 10000)<<endl<<endl;
 
-    test.replication();
-    TEST.replication();
-
-    cout<<P1<<endl;
-    cout<<P2<<endl;
-    cout<<P3<<endl;
-    cout<<Q1<<endl;
-    cout<<Q2<<endl;
-    cout<<Q3<<endl;
-
-    double p1 = Test.price_BSM();
-    double p2 = Test.price_MC(100, 10000);
-    double q1 = tEST.price_BSM();
-    double q2 = tEST.price_MC(100, 10000);
-
-    cout<<p1<<endl;
-    cout<<p2<<endl;
-    cout<<q1<<endl;
-    cout<<q2<<endl;
-
-
-    cout << AmericanPut.price_BT(1000)<<endl;
-    cout << AmericanPut.price_MC(100, 1000)<<endl;
-
-
-    cout<<test1.price_BSM()<<endl;
-    cout<<test1.price_MC(100, 1000)<<endl;
-    cout<<test2.price_BSM()<<endl;
-    cout<<test2.price_MC(100, 1000)<<endl;
-
-    barrier_call BarrierCall(spotprice, strikeprice, maturity, volatility, r, 1, 1, 75.0); //up-and-in call, barrier is 75
-    barrier_put BarrierPut(spotprice, strikeprice, maturity, volatility, r, 0, 1, 75.0); //up-and-out put, barrier is 75
-
-    double R1 = test3.price_MC(100, 1000);
-    double R2 = test4.price_MC(100, 1000);
-
-    cout<<R1<<endl;
-    cout<<R2<<endl;
-
-    lookback_call LookbackCall(spotprice, strikeprice, maturity, volatility, r);
-    lookback_put LookbackPut(spotprice, strikeprice, maturity, volatility, r);
-
-    cout<<test5.price_MC(100, 1000)<<endl;
-    cout<<test6.price_MC(100, 1000)<<endl;
-
-
+    
     return 0;
 }
 
