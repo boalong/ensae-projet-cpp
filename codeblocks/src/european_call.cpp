@@ -28,10 +28,10 @@ double european_call::price_BT(int N)
     double p0 = (up - exp( -r * deltaT )) / ( pow(up, 2) - 1);
     double p1 = exp( -r * deltaT) - p0;
 
-    double p[N]; // declaration of an array of length N
+    double p[N+1]; // declaration of an array of length N
 
     // initial values at time T
-    for (int i=0 ; i < N ; i++)
+    for (int i=0 ; i <= N ; i++)
     {
         p[i] = get_spotprice() * pow(up, 2*i - N) - get_strikeprice();
         if (p[i] < 0)
@@ -41,9 +41,9 @@ double european_call::price_BT(int N)
     }
 
     // move to earlier times
-    for (int j=N-1 ; j > 0 ; j--)
+    for (int j=N-1 ; j >= 0 ; j--)
     {
-        for (int i=0 ; i < j ; i++)
+        for (int i=0 ; i <= j ; i++)
         {
             // binomial value
             p[i] = p0 * p[i+1] + p1 * p[i];
